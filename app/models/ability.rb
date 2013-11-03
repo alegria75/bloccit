@@ -19,7 +19,7 @@ class Ability
     end
 
     #Admins can do anything
-    if user.admin?
+    if user.role? :admin
          can :manage, :all
     #   else
     #     
