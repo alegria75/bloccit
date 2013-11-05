@@ -33,3 +33,4 @@ gem 'jquery-rails'
 gem 'faker'
 gem 'devise'
 gem 'cancan' # to authorize different users for different tasks in app
+gem 'redcarpet'
