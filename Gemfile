@@ -34,3 +34,7 @@ gem 'faker'
 gem 'devise'
 gem 'cancan' # to authorize different users for different tasks in app
 gem 'redcarpet'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+gem 'figaro'
