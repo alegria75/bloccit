@@ -21,6 +21,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.3.1.0'
   
   gem 'sass', '3.2.10'
+  gem 'will_paginate', '~> 3.0'
  
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
