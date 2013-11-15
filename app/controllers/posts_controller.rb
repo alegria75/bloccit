@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
-    @post = Post.find(params[:id])
-    @comments = Post.new #show and create  comments with posts
+    @post = @topic.posts.find(params[:id])
+    @comments = @post.comments.build #show and create comments with posts
   end
 
   def new

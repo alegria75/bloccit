@@ -1,15 +1,24 @@
 <%#create a comment partial to display a collection of comments associated with a post
 # reference http://guides.rubyonrails.org/getting_started.html#laying-down-the-ground-work  
-#7 Refactoring 
+7 Refactoring 
 7.1 Rendering Partial Collections
 First, we will make a comment partial to extract showing all the comments for the post. Create the file app/views/comments/_comment.html.erb and put the following into it: %>
+<%#<div class="media">
+  <%= link_to '#', class: 'pull-left' do %>
+    <%#= image_tag(current_user.avatar.small.url) if comment.user.avatar? %>
+  <%# end %>
+  <%#<div class="media-body">
+    <small><%= comment.user.name %> <%#commented <%= time_ago_in_words(comment.created_at) %> <%#ago</small>
+    <p><%= comment.body %><%#</p>
+  </div>
+</div> %>
 
 <p>
   <strong>Commenter:</strong>
-  <%= comment.user %>
+  <%= comment.user%>
 </p>
  
 <p>
   <strong>Comment:</strong>
   <%= comment.body %>
-</p>
+</p> 
