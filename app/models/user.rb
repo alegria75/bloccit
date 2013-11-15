@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
+  has_many :comments
 	ROLES = %w[member moderator admin]
 def role?(base_role)
   role.nil? ? false : ROLES.index(base_role.to_s) <= ROLES.index(role)
 end  
+#update the user model so that you can call user.comments
+
 
 private
 
