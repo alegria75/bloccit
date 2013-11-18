@@ -12,9 +12,9 @@ class Post < ActiveRecord::Base
   validates :body, length: { minimum: 20 }, presence: true
   validates :topic, presence: true
   validates :user, presence: true 
-end
+
 #see only up or down votes
-mount_uploader :image, ImageUploader
+#mount_uploader :image, ImageUploader
 
   def up_votes
     self.votes.where(value: 1).count
@@ -27,6 +27,6 @@ mount_uploader :image, ImageUploader
    def points
     self.votes.sum(:value).to_i
   end  
-
+end
 
 
