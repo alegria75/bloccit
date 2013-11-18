@@ -17,9 +17,9 @@ class CommentsController < ApplicationController
             redirect_to [@topic, @post]
         else
             flash[:error] = "Comment couldn't be deleted. Try again."
-        redirect_to [@topic, @post]
+            redirect_to [@topic, @post]
         end
-  end
+    end
     private
 
     def comment_params
