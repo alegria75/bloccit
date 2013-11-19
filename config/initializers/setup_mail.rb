@@ -1,8 +1,8 @@
-if Rails.env.development?
-  ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.yahoo.com',
-    :port           => '587',
+=begin if Rails.env.development?
+ # ActionMailer::Base.delivery_method = :smtp
+  #ActionMailer::Base.smtp_settings = {
+   # :address        => 'smtp.yahoo.com',
+    #:port           => '587',
     :authentication => :plain,    
     :user_name            => "jglo75",
     :password             => "mypassword",
@@ -10,8 +10,9 @@ if Rails.env.development?
     :domain               => "yahoo.com",
     :enable_starttls_auto => true
   }
-end
-#Original
+end 
+=end
+Original
 #if Rails.env.production?
   #ActionMailer::Base.delivery_method = :smtp
   #ActionMailer::Base.smtp_settings = {
