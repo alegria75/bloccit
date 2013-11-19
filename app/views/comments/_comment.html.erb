@@ -3,6 +3,7 @@
 7 Refactoring 
 7.1 Rendering Partial Collections
 First, we will make a comment partial to extract showing all the comments for the post. Create the file app/views/comments/_comment.html.erb and put the following into it: %>
+<%= content_tag :div, class: 'media', id: "comment-#{comment.id}" do %>
 <% if comment.user %> <%# line added to stop returning nil -temporary fix %>
   <div class="media">
     <%= link_to '#', class: 'pull-left' do %>

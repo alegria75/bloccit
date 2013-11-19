@@ -1,12 +1,16 @@
 class User < ActiveRecord::Base
   has_many :comments
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 	ROLES = %w[member moderator admin]
 def role?(base_role)
   role.nil? ? false : ROLES.index(base_role.to_s) <= ROLES.index(role)
 end  
 #update the user model so that you can call user.comments
 
+def favorited(post)
+  self.favorites.where(post_id: post.id).first
+end
 
 private
 
@@ -20,8 +24,7 @@ end
          :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :provider, :uid
-  # attr_accessible :title, :body
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :provider, :uid, :email_favorites
   has_many :posts
   before_create :set_member
   mount_uploader :avatar, AvatarUploader # add this line.
