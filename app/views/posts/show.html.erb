@@ -1,38 +1,47 @@
-<h1><%= markdown @post.title %></h1>
-
 <div class="row">
   <div class="span8">
+    <%= render partial: 'votes/voter', locals: { topic: @topic, post: @post } %>
+    <h1> <%= markdown @post.title %> </h1>
   	<small>
-      
-       </div><%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
+  </div>
+  <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
       submitted <%= time_ago_in_words(@post.created_at) %> ago by 
       <%= @post.user.name %>
     </small>
-    <p><%= markdown @post.body %></p>
-  </div>
+  <p><%= markdown @post.body %></p>
+</div>
+
   <div class="span4">
     <% if can? :edit, @post %>
       <%= link_to "Edit", edit_topic_post_path(@topic,@post), class: 'btn btn-large btn-block' %>
     <% end %>
     <% if can? :destroy, @post %>
       <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-large btn-block btn-danger', confirm: 'Are you sure you want to delete this post?' %>
-    <% end %>    
+    <% end %> 
   </div>
+
+  <div>
+    <h3><%= pluralize(@post.points, 'point') %></h3>
+      <small>
+        <%= pluralize(@post.up_votes, 'up vote') %>, 
+        <%= pluralize(@post.down_votes, 'down vote') %>
+      </small>
+  </div>
+
     <p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @post.body %>
-</p>
+    <strong>Title:</strong>
+    <%= @post.title %>
+    </p> 
+    <p>
+    <strong>Text:</strong>
+    <%= @post.body %>
+    </p>
  
 <h2>Comments</h2>
 <%= render @post.comments %>
  
 <h2>Add a comment:</h2>
-<%= form_for([@post, @comments]) do |f| %>
+<%= form_for([@topic, @post, @comments]) do |f| %>
   
   <p>
     <%= f.label :body %><br />
@@ -43,5 +52,5 @@
   </p>
 <% end %>
  
-<%= link_to 'Edit Post', edit_post_path(@post) %> |
-<%= link_to 'Back to Posts', posts_path %>
+<%= link_to 'Edit Post', edit_topic_post_path(@topic, @post) %> |
+<%= link_to 'Back to Posts', topic_posts_path %>

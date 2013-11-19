@@ -1,11 +1,11 @@
 class Post < ActiveRecord::Base
-	attr_accessible :body, :title, :topic, :text
-	has_many :comments
+	has_many :comments, dependent: :destroy
 	has_many :votes, dependent: :destroy
   belongs_to :user
   belongs_to :topic
+  attr_accessible :body, :title, :topic, :image
 
-  default_scope order('created_at DESC')
+  default_scope order('rank DESC')
 
 
   validates :title, length: { minimum: 5 }, presence: true
@@ -14,19 +14,38 @@ class Post < ActiveRecord::Base
   validates :user, presence: true 
 
 #see only up or down votes
+after_create :create_vote #when user submit a post them can auto vote it up
+
 #mount_uploader :image, ImageUploader
 
   def up_votes
     self.votes.where(value: 1).count
+    #update_vote(1)
+    #redirect_to :back
   end
 
   def down_votes
     self.votes.where(value: -1).count
+    #update_vote(-1)
+    #redirect_to :back
   end  
 
    def points
     self.votes.sum(:value).to_i
   end  
-end
 
+  def update_rank
+    age = (self.created_at - Time.new(1970,1,1)) / 86400
+    new_rank = points + age
+
+    self.update_attribute(:rank, new_rank)
+  end
+
+  private
+
+  #Who ever created a post, should automatically be set to "voting" it up.
+  def create_vote
+    self.user.votes.create(value: 1, post: self)
+  end
+end
 

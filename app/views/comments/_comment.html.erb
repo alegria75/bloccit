@@ -17,4 +17,5 @@ First, we will make a comment partial to extract showing all the comments for th
           | <%= link_to "Delete", [@topic, @post, comment], method: :delete %>
         <% end %>
      </small>
+     <p><%= comment.body %></p>
 <% end %>
