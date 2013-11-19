@@ -20,3 +20,6 @@
 
 # Carrierwave image
 public/uploads
+
+#Ignore setup_mail.rb
+/config/initializers/setup_my_mail.rb

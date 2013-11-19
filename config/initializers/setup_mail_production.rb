@@ -10,3 +10,4 @@ if Rails.env.production?
     :enable_starttls_auto => true
   }
 end
+
