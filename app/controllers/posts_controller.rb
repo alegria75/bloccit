@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:id])
+    authorize! :read, @topic, message: "You need to be signed-in to do that."
     @comments = @post.comments.build #show and create comments with posts
   end
 
