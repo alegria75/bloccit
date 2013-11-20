@@ -22,4 +22,11 @@ module ApplicationHelper
   redcarpet = Redcarpet::Markdown.new(renderer, extensions)
   (redcarpet.render text).html_safe
 	end
+
+    def comment_url_helper(comment) #this method returns 
+      #an array of topic, post and comment objects for our _comment partal.
+    post = comment.post
+    topic = post.topic
+    [topic, post, comment]
+  end
 end
