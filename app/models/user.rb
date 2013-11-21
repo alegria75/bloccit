@@ -16,11 +16,7 @@ def voted(post) #method take post object and determines if the user has any vote
 end
 
   
-private
 
-def set_member
-  self.role = 'member'
-end
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -50,4 +46,9 @@ end
     end
     user
   end
+  private
+
+def set_member
+  self.role = 'member'
+end
 end
