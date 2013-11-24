@@ -1,7 +1,7 @@
 <%#created 11-14-13
 # create a comment form partial so users can submit new comments on a post %>
 
-<%= form_for[@topic, post, comment] do |f| %>
+<%= form_for[@topic, post, comment], remote: true do |f| %>
   <p>
     <%= f.label :body %><br />
     <%= f.text_field :commenter %>

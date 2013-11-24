@@ -1,16 +1,27 @@
 class CommentsController < ApplicationController
 	respond_to :html, :js
+
 	def create
-	 @post = Post.find(params[:post_id])
-	 @topic = @post.topic
-	 @comment = @post.comments.build(params[:comment])
-	 @comment.user_id = current_user.id
+	 @post = @topic.posts.find(params[:post_id])
+	 @topic = Topic.find(params[:topic_id])
+	 @comment = @post.comments
+
+	 @comment = current_user.comments.build(params[:comment]
+	 @comment.post = @post
+	 @new_comment = Comment.new
+
+	 authorize! :create, @comment, message: "You need be signed in to do that."
+
 	 if @comment.save
-	 	redirect_to [@topic, @post], notice:"Comment created."
+	 	flash[:notice] ="Comment was created."
 	 else
-	 	redirect_to [@topic, @post], error: "Could not save comment."
+	 	flash[:error] "There was an error saving the comment. Please try again."
 	 end
-	end
+	
+	 respond_with(@comment) do |f|
+    f.html { redirect_to [@topic, @post] }
+   end
+  end
 
 		def destroy
 			@topic = Topic.find(params[:topic_id]) # change get topic from post
