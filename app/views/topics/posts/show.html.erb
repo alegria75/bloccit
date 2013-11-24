@@ -2,14 +2,32 @@
   <div class="span8">
     <%= render partial: 'votes/voter', locals: { topic: @topic, post: @post } %>
     <h1> <%= markdown @post.title %> </h1>
-  	<small>
-  </div>
-  <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
+  	
+    <small>
+    <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
       submitted <%= time_ago_in_words(@post.created_at) %> ago by 
       <%= @post.user.name %>
     </small>
+
   <p><%= markdown @post.body %></p>
-</div>
+  <p><%= image_tag(@post.image_url) if @post.image? %></p> <%#added %>
+
+<hr/>
+
+    <%=render partial: 'comments/comment', collection: @comments %>
+  
+
+  <% if can? :create, Comment %>
+      <hr/>
+      
+      <a href="#" class="js-show-hide" data-selector="js-new-comment">Add Comment</a>
+      <br/>
+      <div class="js-new-comment hide">
+        <h4>New Comment</h4>
+        <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="span4">
     <% if can? :edit, @post %>
@@ -18,8 +36,7 @@
     <% if can? :destroy, @post %>
       <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-large btn-block btn-danger', confirm: 'Are you sure you want to delete this post?' %>
     <% end %> 
-  </div>
-
+  
   <div>
     <h3><%= pluralize(@post.points, 'point') %></h3>
       <small>
@@ -27,32 +44,8 @@
         <%= pluralize(@post.down_votes, 'down vote') %>
       </small>
   </div>
+
   <%= render partial: 'favorites/favorite', locals: { topic: @topic, post: @post } %>
 
-    <p>
-    <strong>Title:</strong>
-    <%= @post.title %>
-    </p> 
-    <p>
-    <strong>Text:</strong>
-    <%= @post.body %>
-    </p>
- 
-<h2>Comments</h2>
-<%#= render @post.comments %> <%# is this the line that gets with line below? Popular Posts %>
-<%=render partial: 'comments/comment', collection: @comments %>
- 
-<h2>Add a comment:</h2>
-<%= form_for([@topic, @post, @comments]) do |f| %>
-  
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
- 
-<%= link_to 'Edit Post', edit_topic_post_path(@topic, @post) %> |
-<%= link_to 'Back to Posts', topic_posts_path %>
+    </div>
+</div>
