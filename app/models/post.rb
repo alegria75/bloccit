@@ -17,7 +17,7 @@ class Post < ActiveRecord::Base
 #see only up or down votes
 after_create :create_vote #when user submit a post them can auto vote it up
 
-#mount_uploader :image, ImageUploader
+mount_uploader :image, ImageUploader
 
   def up_votes
     self.votes.where(value: 1).count
