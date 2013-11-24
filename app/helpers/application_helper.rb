@@ -23,7 +23,7 @@ module ApplicationHelper
   (redcarpet.render text).html_safe
 	end
 
-    def comment_url_helper(comment) #this method returns 
+  def comment_url_helper(comment) #this method returns 
       #an array of topic, post and comment objects for our _comment partal.
     post = comment.post
     topic = post.topic
