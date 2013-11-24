@@ -13,8 +13,8 @@
   <p><%= image_tag(@post.image_url) if @post.image? %></p> <%#added %>
 
 <hr/>
-
-    <%=render partial: 'comments/comment', collection: @comments %>
+<h2 class='js-comments-count'><%= @comments.count %> Comments</h2>
+<%=render partial: 'comments/comment', collection: @comments %>
   
 
   <% if can? :create, Comment %>
